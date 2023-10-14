@@ -1,8 +1,8 @@
 using System.Reflection;
 using System.Net.Sockets;
 using System;
-using Microsoft.EntityFrameWorkCore.Metadata.Builders;
-using Microsoft.EntityFrameWorkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
 namespace Persistence.Data;
 public class APIContext : DbContext

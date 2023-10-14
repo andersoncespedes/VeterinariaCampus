@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Domain.Entities;
 public class Medicamento : BaseEntity
@@ -12,7 +9,8 @@ public class Medicamento : BaseEntity
     public int IdLaboratorioFk{get; set;}
     public Laboratorio Laboratorio { get; set; }
     public ICollection<MovimientoMedicamento> MovimientoMedicamentos {get;set;}
+    public ICollection<DetalleMovimiento> DetalleMovimientos {get; set;}
     public ICollection<TratamientoMedico> TratamientoMedicos {get; set;}
-    public ICollection<MedicamentoProveedores> medicamentoProveedores {get; set;}
+    public ICollection<MedicamentoProveedores> MedicamentoProveedores {get; set;}
     public ICollection<Proveedor> Proveedores {get; set;}
 }
