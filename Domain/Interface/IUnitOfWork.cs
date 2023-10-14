@@ -12,6 +12,8 @@ public interface IUnitOfWork
     public ITratamientoMedico TratamientosMedicos { get; }
     public IPropietario Propietarios { get; }
     public ICita Citas { get; }
+    public IUser Users { get; }
+    public IRol Rols { get; }
     public IDetalleMovimiento DetalleMovimientos { get; }
     public Task<int> SaveAsync();
 }

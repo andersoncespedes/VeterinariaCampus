@@ -19,7 +19,7 @@ namespace API.Services
         private readonly JWT _jwt;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPasswordHasher<Usuario> _passwordHasher;
-        public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt, IPasswordHasher<User> passwordHasher)
+        public UserService(IUnitOfWork unitOfWork, IOptions<JWT> jwt, IPasswordHasher<Usuario> passwordHasher)
         {
             _jwt = jwt.Value;
             _unitOfWork = unitOfWork;
@@ -28,13 +28,13 @@ namespace API.Services
 
         public async Task<string> RegisterAsync(RegisterDto registerDto)
         {
-            var user = new User
+            var user = new Usuario
             {
-                UserEmail = registerDto.UserEmail,
-                UserName = registerDto.UserName
+                Correo = registerDto.UserEmail,
+                Nombre = registerDto.UserName
             };
 
-            user.UserPassword = _passwordHasher.HashPassword(user, registerDto.UserPassword); //Encrypt password
+            user.Contraseña = _passwordHasher.HashPassword(user, registerDto.UserPassword); //Encrypt password
 
             var existingUser = _unitOfWork.Users
                                         .Find(u => u.UserName.ToLower() == registerDto.UserName.ToLower())
@@ -48,7 +48,7 @@ namespace API.Services
                                         .First();
                 try
                 {
-                    user.Rols.Add(rolDefault);
+                    user.Roles.Add(rolDefault);
                     _unitOfWork.Users.Add(user);
                     await _unitOfWork.SaveAsync();
 
@@ -260,19 +260,19 @@ namespace API.Services
 
 
 
-        private JwtSecurityToken CreateJwtToken(User usuario)
+        private JwtSecurityToken CreateJwtToken(Usuario usuario)
         {
-            var roles = usuario.Rols;
+            var roles = usuario.Roles;
             var roleClaims = new List<Claim>();
             foreach (var role in roles)
             {
-                roleClaims.Add(new Claim("roles", role.NombreRol));
+                roleClaims.Add(new Claim("roles", role.Nombre));
             }
             var claims = new[]
             {
-                                new Claim(JwtRegisteredClaimNames.Sub, usuario.UserName),
+                                new Claim(JwtRegisteredClaimNames.Sub, usuario.Nombre),
                                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                                new Claim(JwtRegisteredClaimNames.Email, usuario.UserEmail),
+                                new Claim(JwtRegisteredClaimNames.Email, usuario.Correo),
                                 new Claim("uid", usuario.Id.ToString())
                         }
             .Union(roleClaims);

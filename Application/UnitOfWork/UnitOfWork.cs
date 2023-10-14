@@ -21,6 +21,10 @@ public class UnitOfWork : IUnitOfWork
 
     public IDetalleMovimiento DetalleMovimientos => throw new NotImplementedException();
 
+    public IUser Users => throw new NotImplementedException();
+
+    public IRol Rols => throw new NotImplementedException();
+
     public Task<int> SaveAsync()
     {
         throw new NotImplementedException();
