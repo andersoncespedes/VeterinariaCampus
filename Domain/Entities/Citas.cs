@@ -14,4 +14,5 @@ public class Citas : BaseEntity
     public string Motivo {get; set;}
     public int IdVeterinario {get; set;}
     public Veterinario Veterinario {get; set;}
+    public ICollection<TratamientoMedico> TratamientoMedicos {get; set;}
 }

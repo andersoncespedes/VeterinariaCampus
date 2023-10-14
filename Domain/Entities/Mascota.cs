@@ -14,4 +14,5 @@ public class Mascota : BaseEntity
     public Especie Especie {get; set; }
     public int IdRazaFk { get; set; }
     public Raza Raza {get; set; }
+    public ICollection<Citas> Citas {get; set;}
 }

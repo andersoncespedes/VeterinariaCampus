@@ -10,4 +10,5 @@ public class Veterinario : BaseEntity
     public string Correo { get; set; }
     public string Telefono { get; set; }
     public string Especialidad { get; set; }
+    public ICollection<Citas> Citas {get;set;}
 }
