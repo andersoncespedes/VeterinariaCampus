@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities;
 
-public class Roles : BaseEntity
+public class Rol : BaseEntity
 {
     public string Nombre { get; set; }
     public ICollection<Usuario> Usuarios { get; set; }
