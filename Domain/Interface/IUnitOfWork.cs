@@ -7,6 +7,7 @@ namespace Domain.Interface;
 public interface IUnitOfWork
 {
     public IMedicamento Medicamentos { get; }
+    public IMovimientoMedicamento MovimientoMedicamentos { get; }
     public IProveedor Proveedores { get; }
     public IMascota Mascotas { get; }
     public ITratamientoMedico TratamientosMedicos { get; }

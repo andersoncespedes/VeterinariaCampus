@@ -20,5 +20,14 @@ public class MappingProfile : Profile
         CreateMap<Mascota, PostMascotaDto>().ReverseMap();
 
         CreateMap<Proveedor, ProveedorDto>().ReverseMap();
+
+        CreateMap<Propietario, PropietarioDto>().ReverseMap();
+
+        CreateMap<Citas, CitaDto>().ReverseMap();
+
+        CreateMap<MovimientoMedicamento, MovimientoMedicamentoDto>()
+        .ForMember(e => e.Medicamento, opt => opt.MapFrom(e => e.Medicamento.Nombre))
+        .ForMember(e => e.TipoMovimiento, opt => opt.MapFrom(e => e.TipoMovimiento.Descripcion))
+        .ReverseMap();
     }
 }
