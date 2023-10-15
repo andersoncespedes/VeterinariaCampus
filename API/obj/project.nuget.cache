@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "D6Nt7Su1TY3W8dJGVZqVLIlFsEBUKsjILI0NQPcNYnmaVy7OoT0eWpD4V2GwZJMl3flutYPBYNzL02kat78zUg==",
+  "dgSpecHash": "UyZtZgOBJl7kGyectnzWWkwMDKzd13KnR+816A31nUG5pTExkwtC6FkudxY+kgz49JvDrEkMcwhKK6QkF4Q2Cw==",
   "success": true,
   "projectFilePath": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\API\\API.csproj",
   "expectedPackageFiles": [
@@ -8,7 +8,6 @@
     "C:\\Users\\janus\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\janus\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\janus\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
-    "C:\\Users\\janus\\.nuget\\packages\\jwt\\10.1.1\\jwt.10.1.1.nupkg.sha512",
     "C:\\Users\\janus\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.12\\microsoft.aspnetcore.authentication.jwtbearer.7.0.12.nupkg.sha512",
     "C:\\Users\\janus\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\7.0.12\\microsoft.aspnetcore.jsonpatch.7.0.12.nupkg.sha512",
     "C:\\Users\\janus\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\7.0.12\\microsoft.aspnetcore.mvc.newtonsoftjson.7.0.12.nupkg.sha512",

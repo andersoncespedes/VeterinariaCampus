@@ -37,14 +37,14 @@ namespace API.Services
             user.Contraseña = _passwordHasher.HashPassword(user, registerDto.UserPassword); //Encrypt password
 
             var existingUser = _unitOfWork.Users
-                                        .Find(u => u.UserName.ToLower() == registerDto.UserName.ToLower())
+                                        .Find(u => u.Nombre.ToLower() == registerDto.UserName.ToLower())
                                         .FirstOrDefault();
 
 
             if (existingUser == null)
             {
-                var rolDefault = _unitOfWork.Roles
-                                        .Find(u => u.NombreRol == Authorization.rol_default.ToString())
+                var rolDefault = _unitOfWork.Rols
+                                        .Find(u => u.Nombre == Authorization.rol_default.ToString())
                                         .First();
                 try
                 {
@@ -92,17 +92,17 @@ namespace API.Services
                 return dataUserDto;
             }
 
-            var result = _passwordHasher.VerifyHashedPassword(user, user.UserPassword, model.UserPassword);
+            var result = _passwordHasher.VerifyHashedPassword(user, user.Contraseña, model.UserPassword);
 
             if (result == PasswordVerificationResult.Success)
             {
                 dataUserDto.EstadoAutenticado = true;
                 JwtSecurityToken jwtSecurityToken = CreateJwtToken(user);
                 dataUserDto.UserToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-                dataUserDto.UserEmail = user.UserEmail;
-                dataUserDto.UserName = user.UserName;
-                dataUserDto.UserRoles = user.Rols
-                                                .Select(u => u.NombreRol)
+                dataUserDto.UserEmail = user.Correo;
+                dataUserDto.UserName = user.Nombre;
+                dataUserDto.UserRoles = user.Roles
+                                                .Select(u => u.Nombre)
                                                 .ToList();
 
                 if (user.RefreshTokens.Any(a => a.IsActive))
@@ -148,22 +148,22 @@ namespace API.Services
                 return $"User {model.UserName} does not exists.";
             }
 
-            var result = _passwordHasher.VerifyHashedPassword(user, user.UserPassword, model.UserPassword);
+            var result = _passwordHasher.VerifyHashedPassword(user, user.Contraseña, model.UserPassword);
 
             if (result == PasswordVerificationResult.Success)
             {
-                var rolExists = _unitOfWork.Roles
-                                            .Find(u => u.NombreRol.ToLower() == model.UserRol.ToLower())
+                var rolExists = _unitOfWork.Rols
+                                            .Find(u => u.Nombre.ToLower() == model.UserRol.ToLower())
                                             .FirstOrDefault();
 
                 if (rolExists != null)
                 {
-                    var userHasRole = user.Rols
+                    var userHasRole = user.Roles
                                                 .Any(u => u.Id == rolExists.Id);
 
                     if (userHasRole == false)
                     {
-                        user.Rols.Add(rolExists);
+                        user.Roles.Add(rolExists);
                         _unitOfWork.Users.Update(user);
                         await _unitOfWork.SaveAsync();
                     }
@@ -216,10 +216,10 @@ namespace API.Services
             dataUserDto.EstadoAutenticado = true;
             JwtSecurityToken jwtSecurityToken = CreateJwtToken(usuario);
             dataUserDto.UserToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-            dataUserDto.UserEmail = usuario.UserEmail;
-            dataUserDto.UserName = usuario.UserName;
-            dataUserDto.UserRoles = usuario.Rols
-                                            .Select(u => u.NombreRol)
+            dataUserDto.UserEmail = usuario.Correo;
+            dataUserDto.UserName = usuario.Nombre;
+            dataUserDto.UserRoles = usuario.Roles
+                                            .Select(u => u.Nombre)
                                             .ToList();
             dataUserDto.RefreshToken = newRefreshToken.Token;
             dataUserDto.RefreshTokenExpiry = newRefreshToken.Expires;

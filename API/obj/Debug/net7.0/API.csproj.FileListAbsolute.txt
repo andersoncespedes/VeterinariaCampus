@@ -8,7 +8,6 @@ C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\A
 C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\Humanizer.dll
-C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\JWT.dll
 C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
@@ -59,3 +58,8 @@ C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\obj\Debug\net7.0\r
 C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\obj\Debug\net7.0\API.pdb
 C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\obj\Debug\net7.0\API.genruntimeconfig.cache
 C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\obj\Debug\net7.0\ref\API.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\AspNetCoreRateLimit.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Versioning.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll

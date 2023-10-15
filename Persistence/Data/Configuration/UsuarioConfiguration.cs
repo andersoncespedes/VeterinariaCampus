@@ -30,7 +30,7 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
         .HasColumnName("contraseña")
         .HasColumnType("varchar")
         .IsRequired()
-        .HasMaxLength(50);
+        .HasMaxLength(255);
 
         builder.HasMany(e => e.Roles)
         .WithMany(e => e.Usuarios)
