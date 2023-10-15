@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Application.Repository;
-using Domain.Entities;
 using Domain.Interface;
 using Persistence.Data;
 
@@ -19,6 +15,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private DetalleMovimientoRepository _detalleMov;
     private UserRepository _users;
     private RolRepository _roles;
+    private LaboratorioRepository _laboratorio;
     private readonly APIContext _context;
     public UnitOfWork(APIContext context)
     {
@@ -102,6 +99,15 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         {
             _roles ??= new(_context);
             return _roles;
+        }
+    }
+
+    public ILaboratorio Laboratorios
+    {
+        get
+        {
+            _laboratorio ??= new(_context);
+            return _laboratorio;
         }
     }
 

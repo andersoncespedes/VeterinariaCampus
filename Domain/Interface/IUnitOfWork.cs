@@ -15,5 +15,6 @@ public interface IUnitOfWork
     public IUser Users { get; }
     public IRol Rols { get; }
     public IDetalleMovimiento DetalleMovimientos { get; }
+    public ILaboratorio Laboratorios { get; }
     public Task<int> SaveAsync();
 }

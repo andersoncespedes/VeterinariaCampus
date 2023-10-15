@@ -26,10 +26,14 @@ public class MedicamentoConfiguration : IEntityTypeConfiguration<Medicamento>
         .HasMaxLength(40);
 
         builder.Property(e => e.Precio)
-        .HasColumnName("precion")
+        .HasColumnName("precio")
         .HasColumnType("double")
-        .HasPrecision(2,6)
+        .HasPrecision(2, 6)
         .IsRequired();
+
+        builder.HasOne(e => e.Laboratorio)
+        .WithMany(e => e.Medicamentos)
+        .HasForeignKey(e => e.IdLaboratorioFk);
 
         builder.HasMany(e => e.Proveedores)
         .WithMany(e => e.Medicamentos)
@@ -40,9 +44,10 @@ public class MedicamentoConfiguration : IEntityTypeConfiguration<Medicamento>
             j => j.HasOne(e => e.Medicamento)
             .WithMany(e => e.MedicamentoProveedores),
 
-            j => {
+            j =>
+            {
                 j.ToTable("medicamento_proveedor");
-                j.HasIndex(e => new {e.IdProveedorFk, e.IdMedicamentoFk});
+                j.HasIndex(e => new { e.IdProveedorFk, e.IdMedicamentoFk });
             }
         );
     }
