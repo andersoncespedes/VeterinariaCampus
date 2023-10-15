@@ -36,15 +36,17 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
         .WithMany(e => e.Usuarios)
         .UsingEntity<RolesUsuarios>(
             j => j.HasOne(e => e.Rol)
-            .WithMany(e => e.RolesUsuarios),
+            .WithMany(e => e.RolesUsuarios)
+            .HasForeignKey(e => e.IdRolFk),
 
             j => j.HasOne(e => e.Usuario)
-            .WithMany(e => e.RolesUsuarios),
+            .WithMany(e => e.RolesUsuarios)
+            .HasForeignKey(e => e.IdUserFk),
 
             j =>
             {
                 j.ToTable("usuarios_roles");
-                j.HasIndex(x => new { x.IdUserFk, x.IdRolFk });
+                j.HasKey(x => new { x.IdUserFk, x.IdRolFk });
             }
         );
     }

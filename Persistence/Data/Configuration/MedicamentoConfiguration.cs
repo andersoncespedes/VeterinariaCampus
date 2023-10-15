@@ -39,15 +39,17 @@ public class MedicamentoConfiguration : IEntityTypeConfiguration<Medicamento>
         .WithMany(e => e.Medicamentos)
         .UsingEntity<MedicamentoProveedores>(
             j => j.HasOne(e => e.Proveedor)
-            .WithMany(e => e.MedicamentoProveedores),
+            .WithMany(e => e.MedicamentoProveedores)
+            .HasForeignKey(e => e.IdProveedorFk),
 
             j => j.HasOne(e => e.Medicamento)
-            .WithMany(e => e.MedicamentoProveedores),
+            .WithMany(e => e.MedicamentoProveedores)
+            .HasForeignKey(e => e.IdMedicamentoFk),
 
             j =>
             {
                 j.ToTable("medicamento_proveedor");
-                j.HasIndex(e => new { e.IdProveedorFk, e.IdMedicamentoFk });
+                j.HasKey(e => new { e.IdProveedorFk, e.IdMedicamentoFk });
             }
         );
     }

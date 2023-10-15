@@ -11,8 +11,8 @@ using Persistence.Data;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(APIContext))]
-    [Migration("20231015165328_mig7")]
-    partial class mig7
+    [Migration("20231015184016_mig1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -202,23 +202,18 @@ namespace Persistence.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.MedicamentoProveedores", b =>
                 {
-                    b.Property<int>("MedicamentoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProveedorId")
+                    b.Property<int>("IdProveedorFk")
                         .HasColumnType("int");
 
                     b.Property<int>("IdMedicamentoFk")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdProveedorFk")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.HasKey("MedicamentoId", "ProveedorId");
+                    b.HasKey("IdProveedorFk", "IdMedicamentoFk");
 
-                    b.HasIndex("ProveedorId");
-
-                    b.HasIndex("IdProveedorFk", "IdMedicamentoFk");
+                    b.HasIndex("IdMedicamentoFk");
 
                     b.ToTable("medicamento_proveedor", (string)null);
                 });
@@ -375,23 +370,18 @@ namespace Persistence.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.RolesUsuarios", b =>
                 {
-                    b.Property<int>("RolId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsuarioId")
+                    b.Property<int>("IdUserFk")
                         .HasColumnType("int");
 
                     b.Property<int>("IdRolFk")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdUserFk")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.HasKey("RolId", "UsuarioId");
+                    b.HasKey("IdUserFk", "IdRolFk");
 
-                    b.HasIndex("UsuarioId");
-
-                    b.HasIndex("IdUserFk", "IdRolFk");
+                    b.HasIndex("IdRolFk");
 
                     b.ToTable("usuarios_roles", (string)null);
                 });
@@ -590,13 +580,13 @@ namespace Persistence.Data.Migrations
                 {
                     b.HasOne("Domain.Entities.Medicamento", "Medicamento")
                         .WithMany("MedicamentoProveedores")
-                        .HasForeignKey("MedicamentoId")
+                        .HasForeignKey("IdMedicamentoFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.Proveedor", "Proveedor")
                         .WithMany("MedicamentoProveedores")
-                        .HasForeignKey("ProveedorId")
+                        .HasForeignKey("IdProveedorFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -650,13 +640,13 @@ namespace Persistence.Data.Migrations
                 {
                     b.HasOne("Domain.Entities.Rol", "Rol")
                         .WithMany("RolesUsuarios")
-                        .HasForeignKey("RolId")
+                        .HasForeignKey("IdRolFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.Usuario", "Usuario")
                         .WithMany("RolesUsuarios")
-                        .HasForeignKey("UsuarioId")
+                        .HasForeignKey("IdUserFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

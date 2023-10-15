@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class mig3 : Migration
+    public partial class mig11 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -124,7 +124,7 @@ namespace Persistence.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     correo = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    contraseña = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                    contraseña = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -185,18 +185,18 @@ namespace Persistence.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     cantidad_disponible = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    precion = table.Column<double>(type: "double", precision: 2, scale: 6, nullable: false),
-                    IdLaboratorioFk = table.Column<int>(type: "int", nullable: false),
-                    LaboratorioId = table.Column<int>(type: "int", nullable: true)
+                    precio = table.Column<double>(type: "double", precision: 2, scale: 6, nullable: false),
+                    IdLaboratorioFk = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_medicamento", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_medicamento_laboratorio_LaboratorioId",
-                        column: x => x.LaboratorioId,
+                        name: "FK_medicamento_laboratorio_IdLaboratorioFk",
+                        column: x => x.IdLaboratorioFk,
                         principalTable: "laboratorio",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -229,23 +229,22 @@ namespace Persistence.Data.Migrations
                 name: "usuarios_roles",
                 columns: table => new
                 {
-                    RolId = table.Column<int>(type: "int", nullable: false),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
                     IdUserFk = table.Column<int>(type: "int", nullable: false),
-                    IdRolFk = table.Column<int>(type: "int", nullable: false)
+                    IdRolFk = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_usuarios_roles", x => new { x.RolId, x.UsuarioId });
+                    table.PrimaryKey("PK_usuarios_roles", x => new { x.IdUserFk, x.IdRolFk });
                     table.ForeignKey(
-                        name: "FK_usuarios_roles_rol_RolId",
-                        column: x => x.RolId,
+                        name: "FK_usuarios_roles_rol_IdRolFk",
+                        column: x => x.IdRolFk,
                         principalTable: "rol",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_usuarios_roles_usuario_UsuarioId",
-                        column: x => x.UsuarioId,
+                        name: "FK_usuarios_roles_usuario_IdUserFk",
+                        column: x => x.IdUserFk,
                         principalTable: "usuario",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -293,23 +292,22 @@ namespace Persistence.Data.Migrations
                 name: "medicamento_proveedor",
                 columns: table => new
                 {
-                    MedicamentoId = table.Column<int>(type: "int", nullable: false),
-                    ProveedorId = table.Column<int>(type: "int", nullable: false),
                     IdMedicamentoFk = table.Column<int>(type: "int", nullable: false),
-                    IdProveedorFk = table.Column<int>(type: "int", nullable: false)
+                    IdProveedorFk = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_medicamento_proveedor", x => new { x.MedicamentoId, x.ProveedorId });
+                    table.PrimaryKey("PK_medicamento_proveedor", x => new { x.IdProveedorFk, x.IdMedicamentoFk });
                     table.ForeignKey(
-                        name: "FK_medicamento_proveedor_medicamento_MedicamentoId",
-                        column: x => x.MedicamentoId,
+                        name: "FK_medicamento_proveedor_medicamento_IdMedicamentoFk",
+                        column: x => x.IdMedicamentoFk,
                         principalTable: "medicamento",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_medicamento_proveedor_proveedor_ProveedorId",
-                        column: x => x.ProveedorId,
+                        name: "FK_medicamento_proveedor_proveedor_IdProveedorFk",
+                        column: x => x.IdProveedorFk,
                         principalTable: "proveedor",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -472,19 +470,14 @@ namespace Persistence.Data.Migrations
                 column: "IdRazaFk");
 
             migrationBuilder.CreateIndex(
-                name: "IX_medicamento_LaboratorioId",
+                name: "IX_medicamento_IdLaboratorioFk",
                 table: "medicamento",
-                column: "LaboratorioId");
+                column: "IdLaboratorioFk");
 
             migrationBuilder.CreateIndex(
-                name: "IX_medicamento_proveedor_IdProveedorFk_IdMedicamentoFk",
+                name: "IX_medicamento_proveedor_IdMedicamentoFk",
                 table: "medicamento_proveedor",
-                columns: new[] { "IdProveedorFk", "IdMedicamentoFk" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_medicamento_proveedor_ProveedorId",
-                table: "medicamento_proveedor",
-                column: "ProveedorId");
+                column: "IdMedicamentoFk");
 
             migrationBuilder.CreateIndex(
                 name: "IX_movimiento_medicamento_IdProductoFk",
@@ -517,14 +510,9 @@ namespace Persistence.Data.Migrations
                 column: "IdMedicamentoFk");
 
             migrationBuilder.CreateIndex(
-                name: "IX_usuarios_roles_IdUserFk_IdRolFk",
+                name: "IX_usuarios_roles_IdRolFk",
                 table: "usuarios_roles",
-                columns: new[] { "IdUserFk", "IdRolFk" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_usuarios_roles_UsuarioId",
-                table: "usuarios_roles",
-                column: "UsuarioId");
+                column: "IdRolFk");
         }
 
         /// <inheritdoc />
