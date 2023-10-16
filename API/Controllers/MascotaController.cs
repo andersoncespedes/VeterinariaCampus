@@ -80,4 +80,15 @@ public class MascotaController : BaseApiController
         await _unitOfWork.SaveAsync();
         return mascota;
     }
+    [HttpGet("felino")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+    public async Task<ActionResult<IEnumerable<MascotaDto>>> GetFelino()
+    {
+        var datos = _unitOfWork.Mascotas.Find(e => e.Raza.Nombre.ToLower() == "felino");
+        var mapeo = _mapper.Map<List<MascotaDto>>(datos);
+        return mapeo;
+    }
 }

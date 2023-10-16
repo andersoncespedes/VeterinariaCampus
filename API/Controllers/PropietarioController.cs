@@ -78,4 +78,14 @@ public class PropietarioController : BaseApiController
         await _unitOfWork.SaveAsync();
         return medicamento;
     }
+    [HttpGet("GetWithPets")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<PropWithPetDto>>> GetWithMascota()
+    {
+        var datos = await _unitOfWork.Propietarios.ObtenerConMascota();
+        var mapeo = _mapper.Map<List<PropWithPetDto>>(datos);
+        return mapeo;
+    }
+
 }

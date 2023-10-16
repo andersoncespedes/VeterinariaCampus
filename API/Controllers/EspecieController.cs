@@ -4,12 +4,13 @@ using API.Helpers;
 using Domain.Interface;
 using Domain.Entities;
 using AutoMapper;
+
 namespace API.Controllers;
-public class CitaController : BaseApiController
+public class EspecieController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
     private IMapper _mapper;
-    public CitaController(IUnitOfWork unitOfWork, IMapper mapper)
+    public EspecieController(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
@@ -17,23 +18,23 @@ public class CitaController : BaseApiController
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Pager<CitaDto>>> Paginacion([FromQuery] Params productParams)
+    public async Task<ActionResult<Pager<EspecieDto>>> Paginacion([FromQuery] Params productParams)
     {
-        var labs = await _unitOfWork.Citas.paginacion(productParams.PageIndex, productParams.PageSize, productParams.Search);
-        var mapeo = _mapper.Map<List<CitaDto>>(labs.registros);
-        return new Pager<CitaDto>(mapeo, labs.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
+        var labs = await _unitOfWork.Especies.paginacion(productParams.PageIndex, productParams.PageSize, productParams.Search);
+        var mapeo = _mapper.Map<List<EspecieDto>>(labs.registros);
+        return new Pager<EspecieDto>(mapeo, labs.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
     }
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<CitaDto>> Post(CitaDto dato)
+    public async Task<ActionResult<EspecieDto>> Post(EspecieDto dato)
     {
-        var lab = _mapper.Map<Citas>(dato);
+        var lab = _mapper.Map<Especie>(dato);
         if (lab == null)
         {
             return BadRequest();
         }
-        _unitOfWork.Citas.Add(lab);
+        _unitOfWork.Especies.Add(lab);
         await _unitOfWork.SaveAsync();
         return dato;
     }
@@ -42,50 +43,49 @@ public class CitaController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> Delete(int id)
     {
-        var dato = await _unitOfWork.Citas.GetById(id);
+        var dato = await _unitOfWork.Especies.GetById(id);
         if (dato == null)
         {
             return BadRequest();
         }
-        _unitOfWork.Citas.Remove(dato);
+        _unitOfWork.Especies.Remove(dato);
         await _unitOfWork.SaveAsync();
         return NoContent();
     }
     [HttpGet("Obtener/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<CitaDto>> GetById(int id)
+    public async Task<ActionResult<EspecieDto>> GetById(int id)
     {
-        var dato = await _unitOfWork.Citas.GetById(id);
+        var dato = await _unitOfWork.Especies.GetById(id);
         if (dato == null)
         {
             return BadRequest();
         }
-        return _mapper.Map<CitaDto>(dato);
+        return _mapper.Map<EspecieDto>(dato);
     }
     [HttpPut("update")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<CitaDto>> Update(CitaDto lab)
+    public async Task<ActionResult<EspecieDto>> Update(EspecieDto lab)
     {
-        var dato = await _unitOfWork.Citas.GetById(lab.Id);
+        var dato = await _unitOfWork.Especies.GetById(lab.Id);
         if (dato == null)
         {
             return BadRequest();
         }
-        var datMap = _mapper.Map<Citas>(lab);
-        _unitOfWork.Citas.Update(datMap);
+        var datMap = _mapper.Map<Especie>(lab);
+        _unitOfWork.Especies.Update(datMap);
         await _unitOfWork.SaveAsync();
         return lab;
     }
-    [HttpGet("CitaPrimerTrimestre2023")]
+    [HttpGet("WithPets")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<IEnumerable<MascotaDto>>> GetPrimerTrimestre2023()
+    public async Task<ActionResult<Pager<EspecieWithPetDto>>> GetWithPet([FromQuery] Params productParams)
     {
-        var dato = await _unitOfWork.Citas.FindCitasTrimestreVacunacion();
-        var mapeo = _mapper.Map<List<MascotaDto>>(dato);
-        return mapeo;
+        var labs = await _unitOfWork.Especies.paginacion(productParams.PageIndex, productParams.PageSize, productParams.Search);
+        var mapeo = _mapper.Map<List<EspecieWithPetDto>>(labs.registros);
+        return new Pager<EspecieWithPetDto>(mapeo, labs.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
     }
 }

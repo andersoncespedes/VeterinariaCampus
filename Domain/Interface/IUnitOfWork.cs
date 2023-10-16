@@ -9,6 +9,7 @@ public interface IUnitOfWork
     public IMedicamento Medicamentos { get; }
     public IMovimientoMedicamento MovimientoMedicamentos { get; }
     public IProveedor Proveedores { get; }
+    public IEspecie Especies { get; }
     public IMascota Mascotas { get; }
     public ITratamientoMedico TratamientosMedicos { get; }
     public IPropietario Propietarios { get; }

@@ -7,5 +7,5 @@ using Domain.Entities;
 namespace Domain.Interface;
 public interface ICita : IGenericRepository<Citas>
 {
-
+    Task<IEnumerable<Mascota>> FindCitasTrimestreVacunacion();
 }

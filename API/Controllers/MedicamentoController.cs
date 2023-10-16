@@ -79,4 +79,22 @@ public class MedicamentoController : BaseApiController
         await _unitOfWork.SaveAsync();
         return medicamento;
     }
+    [HttpGet("genfar")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetGenfar()
+    {
+        var dato = _unitOfWork.Medicamentos.Find(e => e.Nombre.ToLower() == "genfar");
+        var mapeo = _mapper.Map<List<MedicamentoDto>>(dato);
+        return mapeo;
+    }
+    [HttpGet("morethan5000")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<MedicamentoDto>>> GetMoreThan5mil()
+    {
+        var dato = _unitOfWork.Medicamentos.Find(e => e.Precio > 5000);
+        var mapeo = _mapper.Map<List<MedicamentoDto>>(dato);
+        return mapeo;
+    }
 }
