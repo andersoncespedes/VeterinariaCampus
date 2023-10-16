@@ -6,15 +6,5 @@ public class DetalleMovimiento : BaseEntity
     public int Cantidad { get; set; }
     public int IdMovMedFk { get; set; }
     public MovimientoMedicamento MovimientoMedicamento { get; set; }
-    public double Precio
-    {
-        get
-        {
-            return Medicamento.Precio * Cantidad;
-        }
-        set
-        {
-            Precio = value;
-        }
-    }
+    public double Precio { get; set; }
 }

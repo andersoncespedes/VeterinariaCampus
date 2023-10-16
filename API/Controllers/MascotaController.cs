@@ -7,6 +7,8 @@ using AutoMapper;
 
 
 namespace API.Controllers;
+[ApiVersion("1.0")]
+[ApiVersion("1.1")]
 public class MascotaController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -16,6 +18,7 @@ public class MascotaController : BaseApiController
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
+    [MapToApiVersion("1.0")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -25,6 +28,7 @@ public class MascotaController : BaseApiController
         var mapeo = _mapper.Map<List<MascotaDto>>(products.registros);
         return new Pager<MascotaDto>(mapeo, products.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
     }
+    [MapToApiVersion("1.1")]
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -39,6 +43,8 @@ public class MascotaController : BaseApiController
         await _unitOfWork.SaveAsync();
         return dato;
     }
+    [MapToApiVersion("1.1")]
+
     [HttpDelete("delete/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -53,6 +59,8 @@ public class MascotaController : BaseApiController
         await _unitOfWork.SaveAsync();
         return NoContent();
     }
+    [MapToApiVersion("1.1")]
+
     [HttpGet("Obtener/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -65,6 +73,7 @@ public class MascotaController : BaseApiController
         }
         return _mapper.Map<MascotaDto>(dato);
     }
+    [MapToApiVersion("1.1")]
     [HttpPut("update")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -80,6 +89,7 @@ public class MascotaController : BaseApiController
         await _unitOfWork.SaveAsync();
         return mascota;
     }
+    [MapToApiVersion("1.0")]
     [HttpGet("felino")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

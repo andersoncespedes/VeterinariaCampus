@@ -322,20 +322,19 @@ namespace Persistence.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    IdProductoFk = table.Column<int>(type: "int", nullable: false),
-                    cantidad = table.Column<int>(type: "int", nullable: false),
                     fecha = table.Column<DateOnly>(type: "date", nullable: false),
-                    IdTipoMovFk = table.Column<int>(type: "int", nullable: false)
+                    IdTipoMovFk = table.Column<int>(type: "int", nullable: false),
+                    Total = table.Column<double>(type: "double", nullable: false),
+                    MedicamentoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_movimiento_medicamento", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_movimiento_medicamento_medicamento_IdProductoFk",
-                        column: x => x.IdProductoFk,
+                        name: "FK_movimiento_medicamento_medicamento_MedicamentoId",
+                        column: x => x.MedicamentoId,
                         principalTable: "medicamento",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_movimiento_medicamento_tipo_movimiento_IdTipoMovFk",
                         column: x => x.IdTipoMovFk,
@@ -491,14 +490,14 @@ namespace Persistence.Data.Migrations
                 column: "IdMedicamentoFk");
 
             migrationBuilder.CreateIndex(
-                name: "IX_movimiento_medicamento_IdProductoFk",
-                table: "movimiento_medicamento",
-                column: "IdProductoFk");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_movimiento_medicamento_IdTipoMovFk",
                 table: "movimiento_medicamento",
                 column: "IdTipoMovFk");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_movimiento_medicamento_MedicamentoId",
+                table: "movimiento_medicamento",
+                column: "MedicamentoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_raza_IdEspecieFk",

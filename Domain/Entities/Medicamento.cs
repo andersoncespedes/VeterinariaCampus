@@ -8,7 +8,6 @@ public class Medicamento : BaseEntity
     public double Precio { get; set; }
     public int IdLaboratorioFk { get; set; }
     public Laboratorio Laboratorio { get; set; }
-    public ICollection<MovimientoMedicamento> MovimientoMedicamentos { get; set; }
     public ICollection<DetalleMovimiento> DetalleMovimientos { get; set; }
     public ICollection<TratamientoMedico> TratamientoMedicos { get; set; }
     public ICollection<MedicamentoProveedores> MedicamentoProveedores { get; set; }

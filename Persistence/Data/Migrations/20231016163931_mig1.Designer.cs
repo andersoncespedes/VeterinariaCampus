@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Data;
 
@@ -10,9 +11,11 @@ using Persistence.Data;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(APIContext))]
-    partial class APIContextModelSnapshot : ModelSnapshot
+    [Migration("20231016163931_mig1")]
+    partial class mig1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,12 +231,17 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("IdTipoMovFk")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MedicamentoId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Total")
                         .HasColumnType("double");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdTipoMovFk");
+
+                    b.HasIndex("MedicamentoId");
 
                     b.ToTable("movimiento_medicamento", (string)null);
                 });
@@ -606,6 +614,10 @@ namespace Persistence.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.Medicamento", null)
+                        .WithMany("MovimientoMedicamentos")
+                        .HasForeignKey("MedicamentoId");
+
                     b.Navigation("TipoMovimiento");
                 });
 
@@ -696,6 +708,8 @@ namespace Persistence.Data.Migrations
                     b.Navigation("DetalleMovimientos");
 
                     b.Navigation("MedicamentoProveedores");
+
+                    b.Navigation("MovimientoMedicamentos");
 
                     b.Navigation("TratamientoMedicos");
                 });

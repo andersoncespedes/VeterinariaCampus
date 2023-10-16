@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 using Domain.Entities;
 
 namespace API.Dtos;
-public class MovimientoMedicamentoDto
+public class PostMovimientoMedicamentoDto
 {
-    public int Id { get; set; }
     public DateOnly Fecha { get; set; }
-    public string TipoMovimiento { get; set; }
+    public int IdTipoMovFk { get; set; }
     public ICollection<DetalleMovimiento> DetalleMovimientos { get; set; }
 }

@@ -38,8 +38,9 @@ public class MappingProfile : Profile
         .ReverseMap();
 
         CreateMap<MovimientoMedicamento, MovimientoMedicamentoDto>()
-        .ForMember(e => e.Medicamento, opt => opt.MapFrom(e => e.Medicamento.Nombre))
-        .ForMember(e => e.TipoMovimiento, opt => opt.MapFrom(e => e.TipoMovimiento.Descripcion))
+        .ReverseMap();
+
+        CreateMap<MovimientoMedicamento, PostMovimientoMedicamentoDto>()
         .ReverseMap();
     }
 }

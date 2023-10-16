@@ -27,7 +27,7 @@ public class MovimientoMedicamentoController : BaseApiController
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<MovimientoMedicamentoDto>> Post(MovimientoMedicamentoDto dato)
+    public async Task<ActionResult<PostMovimientoMedicamentoDto>> Post(PostMovimientoMedicamentoDto dato)
     {
         var lab = _mapper.Map<MovimientoMedicamento>(dato);
         if (lab == null)

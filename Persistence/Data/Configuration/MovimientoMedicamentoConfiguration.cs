@@ -12,20 +12,11 @@ public class MovimientoMedicamentoConfiguration : IEntityTypeConfiguration<Movim
     public void Configure(EntityTypeBuilder<MovimientoMedicamento> builder)
     {
         builder.ToTable("movimiento_medicamento");
-        builder.Property(e => e.Cantidad)
-        .HasColumnName("cantidad")
-        .HasColumnType("int")
-        .IsRequired();
 
         builder.Property(e => e.Fecha)
         .HasColumnName("fecha")
         .HasColumnType("date")
         .IsRequired();
-
-        builder.HasOne(e => e.Medicamento)
-        .WithMany(e => e.MovimientoMedicamentos)
-        .HasForeignKey(e => e.IdProductoFk);
-
         builder.HasOne(e => e.TipoMovimiento)
         .WithMany(e => e.MovimientoMedicamentos)
         .HasForeignKey(e => e.IdTipoMovFk);

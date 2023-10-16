@@ -11,8 +11,8 @@ using Persistence.Data;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(APIContext))]
-    [Migration("20231016131537_mig1")]
-    partial class mig1
+    [Migration("20231016191738_mig6")]
+    partial class mig6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -224,23 +224,17 @@ namespace Persistence.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("int")
-                        .HasColumnName("cantidad");
-
                     b.Property<DateOnly>("Fecha")
                         .HasColumnType("date")
                         .HasColumnName("fecha");
 
-                    b.Property<int>("IdProductoFk")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdTipoMovFk")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<double>("Total")
+                        .HasColumnType("double");
 
-                    b.HasIndex("IdProductoFk");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdTipoMovFk");
 
@@ -609,19 +603,11 @@ namespace Persistence.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.MovimientoMedicamento", b =>
                 {
-                    b.HasOne("Domain.Entities.Medicamento", "Medicamento")
-                        .WithMany("MovimientoMedicamentos")
-                        .HasForeignKey("IdProductoFk")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.TipoMovimiento", "TipoMovimiento")
                         .WithMany("MovimientoMedicamentos")
                         .HasForeignKey("IdTipoMovFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Medicamento");
 
                     b.Navigation("TipoMovimiento");
                 });
@@ -713,8 +699,6 @@ namespace Persistence.Data.Migrations
                     b.Navigation("DetalleMovimientos");
 
                     b.Navigation("MedicamentoProveedores");
-
-                    b.Navigation("MovimientoMedicamentos");
 
                     b.Navigation("TratamientoMedicos");
                 });
