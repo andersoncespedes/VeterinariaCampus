@@ -8,4 +8,5 @@ namespace Domain.Interface;
 public interface ICita : IGenericRepository<Citas>
 {
     Task<IEnumerable<Mascota>> FindCitasTrimestreVacunacion();
+    Task<IEnumerable<Mascota>> GetPerVeterinario(string nombreVet);
 }

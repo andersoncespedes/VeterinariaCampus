@@ -27,4 +27,13 @@ public class CitaRepository : GenericRepository<Citas>, ICita
             .Select(e => e.Mascota)
             .ToListAsync();
     }
+    public async Task<IEnumerable<Mascota>> GetPerVeterinario(string nombreVet)
+    {
+        return await _context.Set<Citas>()
+            .Include(e => e.Mascota)
+            .Include(e => e.Veterinario)
+            .Where(e => e.Veterinario.Nombre.ToLower() == nombreVet.ToLower())
+            .Select(e => e.Mascota)
+            .ToListAsync();
+    }
 }

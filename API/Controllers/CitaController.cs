@@ -5,6 +5,8 @@ using Domain.Interface;
 using Domain.Entities;
 using AutoMapper;
 namespace API.Controllers;
+[ApiVersion("1.0")]
+[ApiVersion("1.1")]
 public class CitaController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -14,6 +16,7 @@ public class CitaController : BaseApiController
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
+    [MapToApiVersion("1.0")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -23,6 +26,7 @@ public class CitaController : BaseApiController
         var mapeo = _mapper.Map<List<CitaDto>>(labs.registros);
         return new Pager<CitaDto>(mapeo, labs.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
     }
+    [MapToApiVersion("1.1")]
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -37,6 +41,7 @@ public class CitaController : BaseApiController
         await _unitOfWork.SaveAsync();
         return dato;
     }
+    [MapToApiVersion("1.1")]
     [HttpDelete("delete/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -51,6 +56,7 @@ public class CitaController : BaseApiController
         await _unitOfWork.SaveAsync();
         return NoContent();
     }
+    [MapToApiVersion("1.0")]
     [HttpGet("Obtener/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -63,6 +69,7 @@ public class CitaController : BaseApiController
         }
         return _mapper.Map<CitaDto>(dato);
     }
+    [MapToApiVersion("1.1")]
     [HttpPut("update")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -78,6 +85,7 @@ public class CitaController : BaseApiController
         await _unitOfWork.SaveAsync();
         return lab;
     }
+    [MapToApiVersion("1.0")]
     [HttpGet("CitaPrimerTrimestre2023")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -85,6 +93,17 @@ public class CitaController : BaseApiController
     public async Task<ActionResult<IEnumerable<MascotaDto>>> GetPrimerTrimestre2023()
     {
         var dato = await _unitOfWork.Citas.FindCitasTrimestreVacunacion();
+        var mapeo = _mapper.Map<List<MascotaDto>>(dato);
+        return mapeo;
+    }
+    [MapToApiVersion("1.1")]
+    [HttpGet("GetPerVeterinario")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IEnumerable<MascotaDto>>> GetPerVeterinario([FromQuery] QueryCitaDto param)
+    {
+        var dato = await _unitOfWork.Citas.GetPerVeterinario(param.nombre);
         var mapeo = _mapper.Map<List<MascotaDto>>(dato);
         return mapeo;
     }
