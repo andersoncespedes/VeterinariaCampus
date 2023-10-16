@@ -17,6 +17,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private RolRepository _roles;
     private LaboratorioRepository _laboratorio;
     private MovimientoMedicamentoRepository _movMed;
+    private VeterinarioRepository _veterinario;
     private readonly APIContext _context;
     public UnitOfWork(APIContext context)
     {
@@ -118,6 +119,15 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         {
             _movMed ??= new(_context);
             return _movMed;
+        }
+    }
+
+    public IVeterinario Veterinarios
+    {
+        get
+        {
+            _veterinario ??= new(_context);
+            return _veterinario;
         }
     }
 

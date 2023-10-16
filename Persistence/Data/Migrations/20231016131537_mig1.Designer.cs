@@ -11,7 +11,7 @@ using Persistence.Data;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(APIContext))]
-    [Migration("20231015184016_mig1")]
+    [Migration("20231016131537_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -366,6 +366,18 @@ namespace Persistence.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("rol", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nombre = "Empleado"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nombre = "Administrador"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.RolesUsuarios", b =>

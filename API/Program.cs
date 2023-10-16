@@ -3,10 +3,15 @@ using Persistence.Data;
 using API.Extensions;
 using AspNetCoreRateLimit;
 using System.Reflection;
-using AutoMapper;
+using Serilog;
+using Persistence;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.|
+var logger = new LoggerConfiguration()
+                    .ReadFrom.Configuration(builder.Configuration)
+                    .Enrich.FromLogContext()
+                    .CreateLogger();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -33,7 +38,22 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+    try
+    {
+        var context = services.GetRequiredService<APIContext>();
+        await context.Database.MigrateAsync();
+        await APIContextSeeder.SeedAsync(context, loggerFactory);
+    }
+    catch (Exception ex)
+    {
+        var _logger = loggerFactory.CreateLogger<Program>();
+        _logger.LogError(ex, "Ocurrio un error durante la migracion");
+    }
+}
 app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();

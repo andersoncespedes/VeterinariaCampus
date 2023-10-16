@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "lAM+0va3KOe9lRb0eCuFev5jNg8OlUo8s+QehdJWHx8Az8ZGST16jyDVMsCIj/yEaadsRBRmnntr0966dX6JpA==",
+  "dgSpecHash": "acjJ6NhSl8ipCTzI+lIevjmhvk5MmcwFr9x/ySEkhcbWRF6oOt7U7X9t7K9UDFQWb2cNEiBzTbCJDzcpSP//UA==",
   "success": true,
   "projectFilePath": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Persistence\\Persistence.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\janus\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\janus\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.12\\microsoft.entityframeworkcore.7.0.12.nupkg.sha512",
     "C:\\Users\\janus\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.12\\microsoft.entityframeworkcore.abstractions.7.0.12.nupkg.sha512",
     "C:\\Users\\janus\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.12\\microsoft.entityframeworkcore.analyzers.7.0.12.nupkg.sha512",

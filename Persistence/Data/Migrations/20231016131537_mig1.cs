@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Persistence.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class mig11 : Migration
+    public partial class mig1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -433,6 +435,15 @@ namespace Persistence.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "rol",
+                columns: new[] { "Id", "nombre" },
+                values: new object[,]
+                {
+                    { 1, "Empleado" },
+                    { 2, "Administrador" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_cita_IdMascotaFk",

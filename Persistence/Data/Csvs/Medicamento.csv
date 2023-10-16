@@ -1,0 +1,5 @@
+Id,Nombre,CantidadDisponible,Precio,IdLaboratorioFk
+1, Paracetamol,40,90,1
+2, Pazatar,60,120,1
+3, ioneria,94,45,2
+4, Salazar,153,12,3

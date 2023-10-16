@@ -18,5 +18,10 @@ public class RolConfiguration : IEntityTypeConfiguration<Rol>
         .HasColumnType("varchar")
         .IsRequired()
         .HasMaxLength(40);
+
+        builder.HasData(
+           new Rol { Id = 1, Nombre = "Empleado" },
+           new Rol { Id = 2, Nombre = "Administrador" }
+       );
     }
 }

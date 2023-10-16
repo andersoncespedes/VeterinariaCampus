@@ -17,5 +17,6 @@ public interface IUnitOfWork
     public IRol Rols { get; }
     public IDetalleMovimiento DetalleMovimientos { get; }
     public ILaboratorio Laboratorios { get; }
+    public IVeterinario Veterinarios { get; }
     public Task<int> SaveAsync();
 }
