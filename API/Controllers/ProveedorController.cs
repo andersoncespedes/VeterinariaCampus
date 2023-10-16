@@ -86,5 +86,15 @@ public class ProveedorController : BaseApiController
         await _unitOfWork.SaveAsync();
         return mascota;
     }
+    [MapToApiVersion("1.1")]
+    [HttpPut("GetPerMed")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<ProveedorDto>>> GetPerMed([FromQuery] QueryCitaDto param)
+    {
+        var datos = await _unitOfWork.Proveedores.GetPerMedicamento(param.nombre);
+        var mapeo = _mapper.Map<List<ProveedorDto>>(datos);
+        return mapeo;
+    }
 
 }
