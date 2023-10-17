@@ -4,6 +4,7 @@ using API.Helpers;
 using Domain.Interface;
 using Domain.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 namespace API.Controllers;
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
@@ -16,7 +17,7 @@ public class CitaController : BaseApiController
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-    [MapToApiVersion("1.0")]
+    [Authorize]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -26,7 +27,7 @@ public class CitaController : BaseApiController
         var mapeo = _mapper.Map<List<CitaDto>>(labs.registros);
         return new Pager<CitaDto>(mapeo, labs.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
     }
-    [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Administrador")]
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -41,6 +42,7 @@ public class CitaController : BaseApiController
         await _unitOfWork.SaveAsync();
         return dato;
     }
+    [Authorize(Roles = "Administrador")]
     [MapToApiVersion("1.1")]
     [HttpDelete("delete/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -56,7 +58,7 @@ public class CitaController : BaseApiController
         await _unitOfWork.SaveAsync();
         return NoContent();
     }
-    [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrador")]
     [HttpGet("Obtener/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -69,7 +71,7 @@ public class CitaController : BaseApiController
         }
         return _mapper.Map<CitaDto>(dato);
     }
-    [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Administrador")]
     [HttpPut("update")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -85,6 +87,7 @@ public class CitaController : BaseApiController
         await _unitOfWork.SaveAsync();
         return lab;
     }
+    [Authorize]
     [MapToApiVersion("1.0")]
     [HttpGet("CitaPrimerTrimestre2023")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -96,6 +99,7 @@ public class CitaController : BaseApiController
         var mapeo = _mapper.Map<List<MascotaDto>>(dato);
         return mapeo;
     }
+    [Authorize]
     [MapToApiVersion("1.1")]
     [HttpGet("GetPerVeterinario")]
     [ProducesResponseType(StatusCodes.Status200OK)]

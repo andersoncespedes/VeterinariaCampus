@@ -4,7 +4,7 @@ using API.Helpers;
 using Domain.Interface;
 using Domain.Entities;
 using AutoMapper;
-
+using Microsoft.AspNetCore.Authorization;
 namespace API.Controllers;
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
@@ -42,6 +42,7 @@ public class LaboratorioController : BaseApiController
         await _unitOfWork.SaveAsync();
         return dato;
     }
+    [Authorize(Roles = "Administrador")]
     [MapToApiVersion("1.1")]
     [HttpDelete("delete/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -70,6 +71,7 @@ public class LaboratorioController : BaseApiController
         }
         return _mapper.Map<LaboratorioDto>(dato);
     }
+    [Authorize(Roles = "Administrador")]
     [MapToApiVersion("1.1")]
     [HttpPut("update")]
     [ProducesResponseType(StatusCodes.Status200OK)]

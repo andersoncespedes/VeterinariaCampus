@@ -2,9 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 using API.Extensions;
 using AspNetCoreRateLimit;
+using Microsoft.AspNetCore.Authorization;
 using System.Reflection;
 using Serilog;
 using Persistence;
+using API.Helpers;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.|
@@ -23,6 +25,14 @@ builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
 builder.Services.ConfigureApiVersioning();
 builder.Services.ConfigureRatelimiting();
 builder.Services.AddJwt(builder.Configuration);
+
+builder.Services.AddAuthorization(opts =>{
+    opts.DefaultPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .AddRequirements(new GlobalVerbRoleRequirement())
+        .Build();
+});
+
 builder.Services.ConfigureJson();
 builder.Services.AddDbContext<APIContext>(options =>
 {

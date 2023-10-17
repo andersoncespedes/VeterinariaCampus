@@ -4,6 +4,7 @@ using API.Helpers;
 using Domain.Interface;
 using Domain.Entities;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers;
 [ApiVersion("1.0")]
@@ -17,6 +18,7 @@ public class EspecieController : BaseApiController
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
+    [Authorize]
     [MapToApiVersion("1.0")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -27,6 +29,7 @@ public class EspecieController : BaseApiController
         var mapeo = _mapper.Map<List<EspecieDto>>(labs.registros);
         return new Pager<EspecieDto>(mapeo, labs.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
     }
+    [Authorize(Roles = "Administrador")]
     [MapToApiVersion("1.1")]
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -42,6 +45,7 @@ public class EspecieController : BaseApiController
         await _unitOfWork.SaveAsync();
         return dato;
     }
+    [Authorize(Roles = "Administrador")]
     [MapToApiVersion("1.1")]
     [HttpDelete("delete/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -70,6 +74,7 @@ public class EspecieController : BaseApiController
         }
         return _mapper.Map<EspecieDto>(dato);
     }
+    [Authorize(Roles = "Administrador")]
     [MapToApiVersion("1.1")]
     [HttpPut("update")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -86,6 +91,7 @@ public class EspecieController : BaseApiController
         await _unitOfWork.SaveAsync();
         return lab;
     }
+    [Authorize]
     [MapToApiVersion("1.0")]
     [HttpGet("WithPets")]
     [ProducesResponseType(StatusCodes.Status200OK)]

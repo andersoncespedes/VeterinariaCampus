@@ -17,7 +17,6 @@ public class MovimientoMedicamentoController : BaseApiController
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-    [MapToApiVersion("1.0")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -27,7 +26,6 @@ public class MovimientoMedicamentoController : BaseApiController
         var mapeo = _mapper.Map<List<MovimientoMedicamentoDto>>(labs.registros);
         return new Pager<MovimientoMedicamentoDto>(mapeo, labs.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
     }
-    [MapToApiVersion("1.1")]
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -42,7 +40,6 @@ public class MovimientoMedicamentoController : BaseApiController
         await _unitOfWork.SaveAsync();
         return dato;
     }
-    [MapToApiVersion("1.1")]
     [HttpDelete("delete/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -57,7 +54,6 @@ public class MovimientoMedicamentoController : BaseApiController
         await _unitOfWork.SaveAsync();
         return NoContent();
     }
-    [MapToApiVersion("1.1")]
     [HttpGet("Obtener/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -70,7 +66,6 @@ public class MovimientoMedicamentoController : BaseApiController
         }
         return _mapper.Map<MovimientoMedicamentoDto>(dato);
     }
-    [MapToApiVersion("1.1")]
     [HttpPut("update")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
