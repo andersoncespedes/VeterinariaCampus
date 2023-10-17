@@ -42,6 +42,7 @@ namespace API.Extensions
             services.AddScoped<IPasswordHasher<Usuario>, PasswordHasher<Usuario>>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IGeneradorPdf, GeneradorPdf>();
         }
 
         public static void AddJwt(this IServiceCollection services, IConfiguration configuration)
