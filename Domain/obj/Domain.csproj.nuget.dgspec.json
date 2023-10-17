@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Domain\\Domain.csproj": {}
+    "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Domain\\Domain.csproj": {
+    "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\janus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\APOLT01\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\janus\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\APOLT01\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -53,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.309\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
