@@ -31,7 +31,20 @@ public class MappingProfile : Profile
 
         CreateMap<Especie, EspecieWithPetDto>().ReverseMap();
 
-        CreateMap<Propietario, PropWithPetDto>().ReverseMap();
+        CreateMap<Propietario, PropWithPetDto>()
+        .ReverseMap();
+
+        CreateMap<Mascota,MascotaConPropDto>()
+        .ForMember(e => e.Raza, opt => opt.MapFrom(e => e.Raza.Nombre))
+        .ForMember(e => e.Propietario, opt => opt.MapFrom(e => e.Propietario))
+        .ReverseMap();
+
+        CreateMap<Raza, RazaWithCount>()
+        .ForMember(e => e.CantidadMascotas, opt => opt.MapFrom(e => e.Mascotas.Count))
+        .ReverseMap();
+
+        CreateMap<Raza, RazaDto>()
+        .ReverseMap();
 
         CreateMap<DetalleMovimiento, DetalleMovimientoDto>()
         .ForMember(e => e.Medicamento, opt => opt.MapFrom(e => e.Medicamento.Nombre))

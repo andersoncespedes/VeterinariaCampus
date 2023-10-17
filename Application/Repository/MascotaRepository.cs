@@ -22,4 +22,11 @@ public class MascotaRepository : GenericRepository<Mascota>, IMascota
             .ToListAsync();
         return (totalRegistros, registros);
     }
+    public async Task<IEnumerable<Mascota>> GetGolden(){
+        return await _context.Set<Mascota>()
+        .Include(e => e.Raza)
+        .Include(e => e.Propietario)
+        .Where(e => e.Raza.Nombre.ToLower() == "golden retriever")
+        .ToListAsync();
+    }
 }

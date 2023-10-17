@@ -7,5 +7,5 @@ using Domain.Entities;
 namespace Domain.Interface;
 public interface IMascota : IGenericRepository<Mascota>
 {
-
+    Task<IEnumerable<Mascota>> GetGolden();
 }

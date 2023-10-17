@@ -13,7 +13,7 @@ using Microsoft.VisualBasic;
 
 namespace API.Services;
 
-public class Generador_Pdf : IGenerarPdf
+public class GeneradorPdf : IGeneradorPdf
 {
     public void Header(Document doc, PdfDocument pdfDocument)
     {
@@ -85,11 +85,12 @@ public class Generador_Pdf : IGenerarPdf
     {
         MemoryStream ms = new MemoryStream();
         // Crear un nuevo documento PDF
-        Document(lstProductDto, ms);
+        Body(lstProductDto, ms);
         byte[] bytesStream = ms.ToArray();
         ms = new MemoryStream();
         ms.Write(bytesStream, 0, bytesStream.Length);
         ms.Position = 0;
         return ms;
     }
+
 }

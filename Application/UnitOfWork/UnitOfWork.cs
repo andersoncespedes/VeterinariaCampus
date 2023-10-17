@@ -19,6 +19,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private MovimientoMedicamentoRepository _movMed;
     private VeterinarioRepository _veterinario;
     private EspecieRepository _especie;
+    private RazaRepository _razas;
     private readonly APIContext _context;
     public UnitOfWork(APIContext context)
     {
@@ -138,6 +139,13 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         {
             _especie ??= new(_context);
             return _especie;
+        }
+    }
+
+    public IRaza Razas {
+        get{
+            _razas ??= new(_context);
+            return _razas;
         }
     }
 

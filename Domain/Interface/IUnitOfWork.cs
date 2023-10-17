@@ -19,5 +19,6 @@ public interface IUnitOfWork
     public IDetalleMovimiento DetalleMovimientos { get; }
     public ILaboratorio Laboratorios { get; }
     public IVeterinario Veterinarios { get; }
+    public IRaza Razas {get;}
     public Task<int> SaveAsync();
 }
