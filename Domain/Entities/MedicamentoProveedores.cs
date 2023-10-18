@@ -1,5 +1,5 @@
 namespace Domain.Entities;
-public class MedicamentoProveedores : BaseEntity
+public class MedicamentoProveedores
 {
     public int IdMedicamentoFk { get; set; }
     public Medicamento Medicamento { get; set; }

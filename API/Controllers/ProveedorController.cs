@@ -99,7 +99,7 @@ public class ProveedorController : BaseApiController
         return mascota;
     }
     [Authorize(Roles = "Administrador, Empleado")]
-    [HttpPut("GetPerMed")]
+    [HttpGet("GetPerMed")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<IEnumerable<ProveedorDto>>> GetPerMed([FromQuery] QueryCitaDto param)

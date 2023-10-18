@@ -43,7 +43,7 @@ public class MedicamentoController : BaseApiController
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<MedicamentoDto>> Post(MedicamentoDto dato)
+    public async Task<ActionResult<Medicamento>> Post(Medicamento dato)
     {
         var med = _mapper.Map<Medicamento>(dato);
         if (med == null)
@@ -104,7 +104,7 @@ public class MedicamentoController : BaseApiController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public ActionResult<IEnumerable<MedicamentoDto>> GetGenfar()
     {
-        var dato = _unitOfWork.Medicamentos.Find(e => e.Nombre.ToLower() == "genfar");
+        var dato = _unitOfWork.Medicamentos.Find(e => e.Laboratorio.Nombre == "genfar");
         var mapeo = _mapper.Map<List<MedicamentoDto>>(dato);
         return mapeo;
     }

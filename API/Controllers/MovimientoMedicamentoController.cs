@@ -98,4 +98,14 @@ public class MovimientoMedicamentoController : BaseApiController
         await _unitOfWork.SaveAsync();
         return lab;
     }
+    [Authorize(Roles = "Administrador, Empleado")]
+    [HttpGet("GetWithPrice")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<MovMedPriceDto>>> GetWithPrice([FromQuery] Params productParams)
+    {
+        var labs = await _unitOfWork.MovimientoMedicamentos.paginacion(productParams.PageIndex, productParams.PageSize, productParams.Search);
+        var mapeo = _mapper.Map<List<MovMedPriceDto>>(labs.registros);
+        return new Pager<MovMedPriceDto>(mapeo, labs.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
+    }
 }

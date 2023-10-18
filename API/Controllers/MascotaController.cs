@@ -107,7 +107,7 @@ public class MascotaController : BaseApiController
 
     public ActionResult<IEnumerable<MascotaDto>> GetFelino()
     {
-        var datos =  _unitOfWork.Mascotas.Find(e => e.Raza.Nombre.ToLower() == "felino");
+        var datos =  _unitOfWork.Mascotas.Find(e => e.Especie.Nombre.ToLower() == "felino");
         var mapeo = _mapper.Map<List<MascotaDto>>(datos);
         return mapeo;
     }

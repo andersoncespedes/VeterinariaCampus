@@ -17,9 +17,10 @@ public class ProveedorRepository : GenericRepository<Proveedor>, IProveedor
     }
     public async Task<IEnumerable<Proveedor>> GetPerMedicamento(string nombre)
     {
-        return await _context.Set<Proveedor>()
-            .Include(e => e.Medicamentos)
-            .Where(e => e.Medicamentos.Where(e => e.Nombre.ToLower() == nombre.ToLower()).Any())
+        return await _context.Set<Medicamento>()
+            .Where(e => e.Nombre.ToLower() == nombre.ToLower())
+            .Include(e => e.Proveedores)
+            .SelectMany(e => e.Proveedores)
             .ToListAsync();
     }
 }

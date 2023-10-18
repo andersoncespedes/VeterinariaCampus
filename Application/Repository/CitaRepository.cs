@@ -20,6 +20,8 @@ public class CitaRepository : GenericRepository<Citas>, ICita
     {
         return await _context.Set<Citas>()
             .Include(e => e.Mascota)
+            .ThenInclude(e => e.Raza)
+            .ThenInclude(e => e.Especie)
             .Where(e =>
                 e.Fecha < new DateOnly(2023, 04, 01)
                 && e.Fecha > new DateOnly(2023, 01, 01)
@@ -29,8 +31,16 @@ public class CitaRepository : GenericRepository<Citas>, ICita
     }
     public async Task<IEnumerable<Mascota>> GetPerVeterinario(string nombreVet)
     {
+        if( nombreVet == null){
+            return await _context.Set<Citas>()
+            .Include(e => e.Mascota)
+            .Select(e => e.Mascota)
+            .ToListAsync();
+        }
         return await _context.Set<Citas>()
             .Include(e => e.Mascota)
+            .ThenInclude(e => e.Raza)
+            .ThenInclude(e => e.Especie)
             .Include(e => e.Veterinario)
             .Where(e => e.Veterinario.Nombre.ToLower() == nombreVet.ToLower())
             .Select(e => e.Mascota)

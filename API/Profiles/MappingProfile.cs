@@ -51,8 +51,12 @@ public class MappingProfile : Profile
         .ReverseMap();
 
         CreateMap<MovimientoMedicamento, MovimientoMedicamentoDto>()
+        .ForMember(e => e.TipoMovimiento, dest => dest.MapFrom(e => e.TipoMovimiento.Descripcion))
         .ReverseMap();
-
+        CreateMap<MovimientoMedicamento, MovMedPriceDto>()
+        .ForMember(e => e.TipoMovimiento, dest => dest.MapFrom(e => e.TipoMovimiento.Descripcion))
+        .ForMember(e => e.Total, dest => dest.MapFrom(e => e.DetalleMovimientos.Select(e => e.Precio).Sum()))
+        .ReverseMap();
         CreateMap<MovimientoMedicamento, PostMovimientoMedicamentoDto>()
         .ReverseMap();
     }

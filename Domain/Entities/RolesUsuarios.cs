@@ -2,7 +2,7 @@
 
 namespace Domain.Entities;
 
-public class RolesUsuarios : BaseEntity
+public class RolesUsuarios 
 {
     public int IdUserFk { get; set; }
     public Usuario Usuario { get; set; }

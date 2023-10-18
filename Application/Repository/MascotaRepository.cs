@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
 using Domain.Interface;
 using Persistence.Data;
+using System.Linq.Expressions;
 
 namespace Application.Repository;
 public class MascotaRepository : GenericRepository<Mascota>, IMascota
@@ -21,6 +22,13 @@ public class MascotaRepository : GenericRepository<Mascota>, IMascota
             .Take(pageSize)
             .ToListAsync();
         return (totalRegistros, registros);
+    }
+    public override IEnumerable<Mascota> Find(Expression<Func<Mascota, bool>> expression)
+    {
+        return _context.Set<Mascota>()
+        .Include(e => e.Especie)
+        .Include(e => e.Raza)
+        .Where(expression);
     }
     public async Task<IEnumerable<Mascota>> GetGolden(){
         return await _context.Set<Mascota>()
