@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Reflection;
 using CsvHelper;
+using CsvHelper.Configuration;
 using Domain.Entities;
 using Microsoft.Extensions.Logging;
 using Persistence.Data;
@@ -13,28 +14,92 @@ public class APIContextSeeder
     {
         try
         {
-            var ruta = "C:/Users/janus/Desktop/ProyectoAnderson/VeterinariaCampus/Persistence/Data/Csvs/";
-
-            if (!context.Laboratorios.Any())
+            var ruta = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            if (!context.Proveedores.Any())
             {
-                using (var readerLaboratorio = new StreamReader(ruta + @"Laboratorio.csv"))
+                using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/Proveedor.csv"))
                 {
                     using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
                     {
-                        var laboratorios = csvLaboratorio.GetRecords<Laboratorio>();
-                        context.Laboratorios.AddRange(laboratorios);
+                        var laboratorios = csvLaboratorio.GetRecords<Proveedor>();
+                        context.Proveedores.AddRange(laboratorios);
                         await context.SaveChangesAsync();
                     }
                 }
             }
-            if (!context.Medicamentos.Any())
+            if (!context.Propietarios.Any())
             {
-                using (var readerMedicamento = new StreamReader(ruta + @"Medicamento.csv"))
+                using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/Propietario.csv"))
                 {
-                    using (var csvMedicamento = new CsvReader(readerMedicamento, CultureInfo.InvariantCulture))
+                    using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
                     {
-                        var Medic = csvMedicamento.GetRecords<Medicamento>();
-                        context.Medicamentos.AddRange(Medic);
+                        var laboratorios = csvLaboratorio.GetRecords<Propietario>();
+                        context.Propietarios.AddRange(laboratorios);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+            if (!context.TiposMovimientos.Any())
+            {
+                using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/TipoMovimiento.csv"))
+                {
+                    using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
+                    {
+                        var laboratorios = csvLaboratorio.GetRecords<TipoMovimiento>();
+                        context.TiposMovimientos.AddRange(laboratorios);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+            if (!context.TiposMovimientos.Any())
+            {
+                using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/TipoMovimiento.csv"))
+                {
+                    using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
+                    {
+                        var laboratorios = csvLaboratorio.GetRecords<TipoMovimiento>();
+                        context.TiposMovimientos.AddRange(laboratorios);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+            if (!context.Especies.Any())
+            {
+                using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/Especie.csv"))
+                {
+                    using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
+                    {
+                        var especie = csvLaboratorio.GetRecords<Especie>();
+                        context.Especies.AddRange(especie);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+          if (!context.Medicamentos.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/Medicamento.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<Medicamento>();
+                        List<Medicamento> entidad = new List<Medicamento>();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new Medicamento
+                            {
+                                Id = item.Id,
+                                Nombre = item.Nombre,
+                                CantidadDisponible = item.CantidadDisponible,
+                                Precio = item.Precio,
+                                IdLaboratorioFk = item.IdLaboratorioFk,
+                            });
+                        }
+                        context.Medicamentos.AddRange(entidad);
                         await context.SaveChangesAsync();
                     }
                 }
