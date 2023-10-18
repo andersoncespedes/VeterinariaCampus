@@ -17,7 +17,8 @@ public class LaboratorioController : BaseApiController
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-    [MapToApiVersion("1.0")]
+    [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -27,7 +28,18 @@ public class LaboratorioController : BaseApiController
         var mapeo = _mapper.Map<List<LaboratorioDto>>(labs.registros);
         return new Pager<LaboratorioDto>(mapeo, labs.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
     }
-    [MapToApiVersion("1.1")]
+    [MapToApiVersion("1.0")]
+    [HttpGet]
+    [Authorize(Roles = "Administrador, Empleado")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<LaboratorioDto>>> GetAll(){
+        var datos = await _unitOfWork.Laboratorios.GetAll();
+        var mapeo = _mapper.Map<List<LaboratorioDto>>(datos);
+        return mapeo;
+    }
+
+    [Authorize(Roles = "Administrador")]
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -43,7 +55,6 @@ public class LaboratorioController : BaseApiController
         return dato;
     }
     [Authorize(Roles = "Administrador")]
-    [MapToApiVersion("1.1")]
     [HttpDelete("delete/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -58,7 +69,7 @@ public class LaboratorioController : BaseApiController
         await _unitOfWork.SaveAsync();
         return NoContent();
     }
-    [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [HttpGet("Obtener/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -72,7 +83,6 @@ public class LaboratorioController : BaseApiController
         return _mapper.Map<LaboratorioDto>(dato);
     }
     [Authorize(Roles = "Administrador")]
-    [MapToApiVersion("1.1")]
     [HttpPut("update")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

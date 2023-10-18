@@ -17,7 +17,8 @@ public class CitaController : BaseApiController
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-    [Authorize]
+    [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -26,6 +27,16 @@ public class CitaController : BaseApiController
         var labs = await _unitOfWork.Citas.paginacion(productParams.PageIndex, productParams.PageSize, productParams.Search);
         var mapeo = _mapper.Map<List<CitaDto>>(labs.registros);
         return new Pager<CitaDto>(mapeo, labs.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
+    }
+    [MapToApiVersion("1.0")]
+    [HttpGet]
+    [Authorize(Roles = "Administrador, Empleado")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<CitaDto>>> GetAll(){
+        var datos = await _unitOfWork.Citas.GetAll();
+        var mapeo = _mapper.Map<List<CitaDto>>(datos);
+        return mapeo;
     }
     [Authorize(Roles = "Administrador")]
     [HttpPost("create")]
@@ -43,7 +54,6 @@ public class CitaController : BaseApiController
         return dato;
     }
     [Authorize(Roles = "Administrador")]
-    [MapToApiVersion("1.1")]
     [HttpDelete("delete/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -87,8 +97,7 @@ public class CitaController : BaseApiController
         await _unitOfWork.SaveAsync();
         return lab;
     }
-    [Authorize]
-    [MapToApiVersion("1.0")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [HttpGet("CitaPrimerTrimestre2023")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -99,8 +108,7 @@ public class CitaController : BaseApiController
         var mapeo = _mapper.Map<List<MascotaDto>>(dato);
         return mapeo;
     }
-    [Authorize]
-    [MapToApiVersion("1.1")]
+    [Authorize(Roles = "Administrador, Empleado")]
     [HttpGet("GetPerVeterinario")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

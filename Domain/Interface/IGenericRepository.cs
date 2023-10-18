@@ -12,5 +12,6 @@ public interface IGenericRepository<T> where T : BaseEntity
     Task<T> GetById(int id);
     IEnumerable<T> Find(Expression<Func<T, bool>> expression);
     Task<(int totalRegistros, IEnumerable<T> registros)> paginacion(int pageIndex, int pageSize, string _search);
+    Task<IEnumerable<T>> GetAll();
 
 }
