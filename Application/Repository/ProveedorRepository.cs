@@ -21,6 +21,7 @@ public class ProveedorRepository : GenericRepository<Proveedor>, IProveedor
             .Where(e => e.Nombre.ToLower() == nombre.ToLower())
             .Include(e => e.Proveedores)
             .SelectMany(e => e.Proveedores)
+            .Distinct()
             .ToListAsync();
     }
 }
