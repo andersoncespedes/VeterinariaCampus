@@ -26,7 +26,8 @@ builder.Services.ConfigureApiVersioning();
 builder.Services.ConfigureRatelimiting();
 builder.Services.AddJwt(builder.Configuration);
 
-builder.Services.AddAuthorization(opts =>{
+builder.Services.AddAuthorization(opts =>
+{
     opts.DefaultPolicy = new AuthorizationPolicyBuilder()
         .RequireAuthenticatedUser()
         .AddRequirements(new GlobalVerbRoleRequirement())
@@ -56,13 +57,18 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<APIContext>();
         await context.Database.MigrateAsync();
-        
+        await APIContextSeeder.SeedVeterinarioAsync(context, loggerFactory);
+        await APIContextSeeder.SeedLabAsync(context, loggerFactory);
         await APIContextSeeder.SeedEspeciesAsync(context, loggerFactory);
         await APIContextSeeder.SeedPropietariosAsync(context, loggerFactory);
-        await APIContextSeeder.SeedProveedorAsync(context,loggerFactory);
+        await APIContextSeeder.SeedProveedorAsync(context, loggerFactory);
         await APIContextSeeder.SeedTipoMovAsync(context, loggerFactory);
         await APIContextSeeder.SeedRolesAsync(context, loggerFactory);
+        await APIContextSeeder.SeedRazasAsync(context, loggerFactory);
+        await APIContextSeeder.SeedMovMedAsync(context, loggerFactory);
+        await APIContextSeeder.SeedDetalMovAsync(context, loggerFactory);
         await APIContextSeeder.SeedAsync(context, loggerFactory);
+        await APIContextSeeder.SeedCitasAsync(context, loggerFactory);
     }
     catch (Exception ex)
     {

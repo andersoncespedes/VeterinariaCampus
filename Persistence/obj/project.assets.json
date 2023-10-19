@@ -724,19 +724,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Anderson David\\.nuget\\packages\\": {}
+    "C:\\Users\\janus\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Anderson David\\Desktop\\VeterinariaCampus\\Persistence\\Persistence.csproj",
+      "projectUniqueName": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Persistence\\Persistence.csproj",
       "projectName": "Persistence",
-      "projectPath": "C:\\Users\\Anderson David\\Desktop\\VeterinariaCampus\\Persistence\\Persistence.csproj",
-      "packagesPath": "C:\\Users\\Anderson David\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Anderson David\\Desktop\\VeterinariaCampus\\Persistence\\obj\\",
+      "projectPath": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Persistence\\Persistence.csproj",
+      "packagesPath": "C:\\Users\\janus\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Anderson David\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\janus\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -748,8 +748,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\Anderson David\\Desktop\\VeterinariaCampus\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\Anderson David\\Desktop\\VeterinariaCampus\\Domain\\Domain.csproj"
+            "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Domain\\Domain.csproj"
             }
           }
         }
@@ -793,7 +793,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.309\\RuntimeIdentifierGraph.json"
       }
     }
   }

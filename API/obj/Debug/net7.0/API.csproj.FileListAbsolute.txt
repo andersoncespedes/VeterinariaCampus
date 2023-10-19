@@ -163,3 +163,15 @@ C:\Users\APOLT01\Desktop\Veterinaria\API\obj\Debug\net7.0\ref\API.dll
 C:\Users\Anderson David\Desktop\VeterinariaCampus\API\obj\Debug\net7.0\API.dll
 C:\Users\Anderson David\Desktop\VeterinariaCampus\API\obj\Debug\net7.0\refint\API.dll
 C:\Users\Anderson David\Desktop\VeterinariaCampus\API\obj\Debug\net7.0\API.pdb
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\itext.barcodes.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\itext.bouncy-castle-connector.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\itext.forms.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\itext.io.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\itext.kernel.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\itext.layout.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\itext.pdfa.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\itext.sign.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\itext.styledxmlparser.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\itext.svg.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\itext.commons.dll
+C:\Users\janus\Desktop\ProyectoAnderson\VeterinariaCampus\API\bin\Debug\net7.0\Microsoft.DotNet.PlatformAbstractions.dll

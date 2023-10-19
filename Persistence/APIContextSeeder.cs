@@ -76,7 +76,7 @@ public class APIContextSeeder
                 }
             }
         }
-        catch (Exception err)
+        catch (Exception ex)
         {
             var logger = loggerFactory.CreateLogger<APIContext>();
             logger.LogError(ex.Message);
@@ -99,30 +99,211 @@ public class APIContextSeeder
                 }
             }
         }
-        catch (Exception err)
+        catch (Exception ex)
         {
             var logger = loggerFactory.CreateLogger<APIContext>();
             logger.LogError(ex.Message);
         }
     }
-    public static async Task SeedAsync(APIContext context, ILoggerFactory loggerFactory)
+    public static async Task SeedRazasAsync(APIContext context, ILoggerFactory loggerFactory)
     {
         try
         {
             if (!context.Razas.Any())
             {
-                using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/Raza.csv"))
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/Raza.csv"))
                 {
-                    using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
                     {
-                        var especie = csvLaboratorio.GetRecords<Raza>();
-                        context.Razas.AddRange(especie);
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<Raza>();
+                        List<Raza> entidad = new List<Raza>();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new Raza
+                            {
+                                Id = item.Id,
+                                Nombre = item.Nombre,
+                                IdEspecieFk = item.IdEspecieFk,
+                            });
+                        }
+                        context.Razas.AddRange(entidad);
                         await context.SaveChangesAsync();
                     }
                 }
             }
         }
-        catch (Exception err)
+        catch (Exception ex)
+        {
+            var logger = loggerFactory.CreateLogger<APIContext>();
+            logger.LogError(ex.Message);
+        }
+    }
+    public static async Task SeedCitasAsync(APIContext context, ILoggerFactory loggerFactory)
+    {
+        try
+        {
+            if (!context.Citas.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/Cita.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<Citas>();
+                        List<Citas> entidad = new List<Citas>();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new Citas
+                            {
+                                Id = item.Id,
+                                IdMascotaFk = item.IdMascotaFk,
+                                Fecha = item.Fecha,
+                                Hora = item.Hora,
+                                Motivo = item.Motivo,
+                                IdVeterinario = item.IdVeterinario,
+                            });
+                        }
+                        context.Citas.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            var logger = loggerFactory.CreateLogger<APIContext>();
+            logger.LogError(ex.Message);
+        }
+    }
+    public static async Task SeedDetalMovAsync(APIContext context, ILoggerFactory loggerFactory)
+    {
+        try
+        {
+            if (!context.DetallesMovimientos.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/DetalleMov.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<DetalleMovimiento>();
+                        List<DetalleMovimiento> entidad = new List<DetalleMovimiento>();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new DetalleMovimiento
+                            {
+                                Id = item.Id,
+                                IdProductoFk = item.IdProductoFk,
+                                IdMovMedFk = item.IdMovMedFk,
+                                Precio = item.Precio,
+                                Cantidad = item.Cantidad,
+                            });
+                        }
+                        context.DetallesMovimientos.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            var logger = loggerFactory.CreateLogger<APIContext>();
+            logger.LogError(ex.Message);
+        }
+    }
+    public static async Task SeedMovMedAsync(APIContext context, ILoggerFactory loggerFactory)
+    {
+        try
+        {
+            if (!context.MovimientosMedicamentos.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/MovimientoMedicamento.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<MovimientoMedicamento>();
+                        List<MovimientoMedicamento> entidad = new List<MovimientoMedicamento>();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new MovimientoMedicamento
+                            {
+                                Id = item.Id,
+                                IdTipoMovFk = item.IdTipoMovFk,
+                                Fecha = item.Fecha,
+                                Total = item.Total,
+                            });
+                        }
+                        context.MovimientosMedicamentos.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            var logger = loggerFactory.CreateLogger<APIContext>();
+            logger.LogError(ex.Message);
+        }
+    }
+    public static async Task SeedVeterinarioAsync(APIContext context, ILoggerFactory loggerFactory)
+    {
+        try
+        {
+            if (!context.Veterinarios.Any())
+            {
+                using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/Veterinario.csv"))
+                {
+                    using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
+                    {
+                        var especie = csvLaboratorio.GetRecords<Veterinario>();
+                        context.Veterinarios.AddRange(especie);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            var logger = loggerFactory.CreateLogger<APIContext>();
+            logger.LogError(ex.Message);
+        }
+    }
+    public static async Task SeedLabAsync(APIContext context, ILoggerFactory loggerFactory)
+    {
+        try
+        {
+            if (!context.Laboratorios.Any())
+            {
+                using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/laboratorio.csv"))
+                {
+                    using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
+                    {
+                        var especie = csvLaboratorio.GetRecords<Laboratorio>();
+                        context.Laboratorios.AddRange(especie);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
         {
             var logger = loggerFactory.CreateLogger<APIContext>();
             logger.LogError(ex.Message);
