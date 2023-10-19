@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Reflection;
 using CsvHelper;
@@ -10,11 +11,12 @@ namespace Persistence;
 
 public class APIContextSeeder
 {
-    public static async Task SeedAsync(APIContext context, ILoggerFactory loggerFactory)
+    public static async Task SeedProveedorAsync(APIContext context, ILoggerFactory loggerFactory)
     {
         try
         {
-            var ruta = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+
             if (!context.Proveedores.Any())
             {
                 using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/Proveedor.csv"))
@@ -27,6 +29,17 @@ public class APIContextSeeder
                     }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            var logger = loggerFactory.CreateLogger<APIContext>();
+            logger.LogError(ex.Message);
+        }
+    }
+    public static async Task SeedPropietariosAsync(APIContext context, ILoggerFactory loggerFactory)
+    {
+        try
+        {
             if (!context.Propietarios.Any())
             {
                 using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/Propietario.csv"))
@@ -39,6 +52,17 @@ public class APIContextSeeder
                     }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            var logger = loggerFactory.CreateLogger<APIContext>();
+            logger.LogError(ex.Message);
+        }
+    }
+    public static async Task SeedTipoMovAsync(APIContext context, ILoggerFactory loggerFactory)
+    {
+        try
+        {
             if (!context.TiposMovimientos.Any())
             {
                 using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/TipoMovimiento.csv"))
@@ -51,18 +75,17 @@ public class APIContextSeeder
                     }
                 }
             }
-            if (!context.TiposMovimientos.Any())
-            {
-                using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/TipoMovimiento.csv"))
-                {
-                    using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
-                    {
-                        var laboratorios = csvLaboratorio.GetRecords<TipoMovimiento>();
-                        context.TiposMovimientos.AddRange(laboratorios);
-                        await context.SaveChangesAsync();
-                    }
-                }
-            }
+        }
+        catch (Exception err)
+        {
+            var logger = loggerFactory.CreateLogger<APIContext>();
+            logger.LogError(ex.Message);
+        }
+    }
+    public static async Task SeedEspeciesAsync(APIContext context, ILoggerFactory loggerFactory)
+    {
+        try
+        {
             if (!context.Especies.Any())
             {
                 using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/Especie.csv"))
@@ -75,6 +98,17 @@ public class APIContextSeeder
                     }
                 }
             }
+        }
+        catch (Exception err)
+        {
+            var logger = loggerFactory.CreateLogger<APIContext>();
+            logger.LogError(ex.Message);
+        }
+    }
+    public static async Task SeedAsync(APIContext context, ILoggerFactory loggerFactory)
+    {
+        try
+        {
             if (!context.Razas.Any())
             {
                 using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/Raza.csv"))
@@ -87,6 +121,18 @@ public class APIContextSeeder
                     }
                 }
             }
+        }
+        catch (Exception err)
+        {
+            var logger = loggerFactory.CreateLogger<APIContext>();
+            logger.LogError(ex.Message);
+        }
+    }
+    public static async Task SeedAsync(APIContext context, ILoggerFactory loggerFactory)
+    {
+        try
+        {
+            var ruta = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (!context.Mascotas.Any())
             {
                 using (var reader = new StreamReader("../Persistence/Data/Csvs/Mascota.csv"))

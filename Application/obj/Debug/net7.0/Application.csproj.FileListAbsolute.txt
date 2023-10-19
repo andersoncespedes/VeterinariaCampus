@@ -32,3 +32,6 @@ C:\Users\APOLT01\Desktop\Veterinaria\Application\obj\Debug\net7.0\Application.dl
 C:\Users\APOLT01\Desktop\Veterinaria\Application\obj\Debug\net7.0\refint\Application.dll
 C:\Users\APOLT01\Desktop\Veterinaria\Application\obj\Debug\net7.0\Application.pdb
 C:\Users\APOLT01\Desktop\Veterinaria\Application\obj\Debug\net7.0\ref\Application.dll
+C:\Users\Anderson David\Desktop\VeterinariaCampus\Application\obj\Debug\net7.0\Application.dll
+C:\Users\Anderson David\Desktop\VeterinariaCampus\Application\obj\Debug\net7.0\refint\Application.dll
+C:\Users\Anderson David\Desktop\VeterinariaCampus\Application\obj\Debug\net7.0\Application.pdb

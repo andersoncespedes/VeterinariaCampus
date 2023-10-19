@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\APOLT01\\.nuget\\packages\\": {}
+    "C:\\Users\\Anderson David\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\Domain\\Domain.csproj",
+      "projectUniqueName": "C:\\Users\\Anderson David\\Desktop\\VeterinariaCampus\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\Domain\\Domain.csproj",
-      "packagesPath": "C:\\Users\\APOLT01\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\Domain\\obj\\",
+      "projectPath": "C:\\Users\\Anderson David\\Desktop\\VeterinariaCampus\\Domain\\Domain.csproj",
+      "packagesPath": "C:\\Users\\Anderson David\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Anderson David\\Desktop\\VeterinariaCampus\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\APOLT01\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Anderson David\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"

@@ -56,6 +56,12 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<APIContext>();
         await context.Database.MigrateAsync();
+        
+        await APIContextSeeder.SeedEspeciesAsync(context, loggerFactory);
+        await APIContextSeeder.SeedPropietariosAsync(context, loggerFactory);
+        await APIContextSeeder.SeedProveedorAsync(context,loggerFactory);
+        await APIContextSeeder.SeedTipoMovAsync(context, loggerFactory);
+        await APIContextSeeder.SeedRolesAsync(context, loggerFactory);
         await APIContextSeeder.SeedAsync(context, loggerFactory);
     }
     catch (Exception ex)

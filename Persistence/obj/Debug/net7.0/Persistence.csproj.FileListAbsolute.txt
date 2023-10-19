@@ -28,3 +28,11 @@ C:\Users\APOLT01\Desktop\Veterinaria\Persistence\obj\Debug\net7.0\Persistence.dl
 C:\Users\APOLT01\Desktop\Veterinaria\Persistence\obj\Debug\net7.0\refint\Persistence.dll
 C:\Users\APOLT01\Desktop\Veterinaria\Persistence\obj\Debug\net7.0\Persistence.pdb
 C:\Users\APOLT01\Desktop\Veterinaria\Persistence\obj\Debug\net7.0\ref\Persistence.dll
+C:\Users\Anderson David\Desktop\VeterinariaCampus\Persistence\obj\Debug\net7.0\Persistence.csproj.AssemblyReference.cache
+C:\Users\Anderson David\Desktop\VeterinariaCampus\Persistence\obj\Debug\net7.0\Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Anderson David\Desktop\VeterinariaCampus\Persistence\obj\Debug\net7.0\Persistence.AssemblyInfoInputs.cache
+C:\Users\Anderson David\Desktop\VeterinariaCampus\Persistence\obj\Debug\net7.0\Persistence.AssemblyInfo.cs
+C:\Users\Anderson David\Desktop\VeterinariaCampus\Persistence\obj\Debug\net7.0\Persistence.csproj.CoreCompileInputs.cache
+C:\Users\Anderson David\Desktop\VeterinariaCampus\Persistence\obj\Debug\net7.0\Persistence.dll
+C:\Users\Anderson David\Desktop\VeterinariaCampus\Persistence\obj\Debug\net7.0\refint\Persistence.dll
+C:\Users\Anderson David\Desktop\VeterinariaCampus\Persistence\obj\Debug\net7.0\Persistence.pdb

@@ -1,7 +1,7 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
-namespace Persistence.Data;
+namespace Persistence;
 public class APIContext : DbContext
 {
     public DbSet<Citas> Citas { get; set; }
