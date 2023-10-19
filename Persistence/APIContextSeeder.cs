@@ -23,8 +23,8 @@ public class APIContextSeeder
                 {
                     using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
                     {
-                        var laboratorios = csvLaboratorio.GetRecords<Proveedor>();
-                        context.Proveedores.AddRange(laboratorios);
+                        var record = csvLaboratorio.GetRecords<Proveedor>();
+                        context.Proveedores.AddRange(record);
                         await context.SaveChangesAsync();
                     }
                 }
@@ -46,8 +46,8 @@ public class APIContextSeeder
                 {
                     using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
                     {
-                        var laboratorios = csvLaboratorio.GetRecords<Propietario>();
-                        context.Propietarios.AddRange(laboratorios);
+                        var record = csvLaboratorio.GetRecords<Propietario>();
+                        context.Propietarios.AddRange(record);
                         await context.SaveChangesAsync();
                     }
                 }
@@ -69,8 +69,8 @@ public class APIContextSeeder
                 {
                     using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
                     {
-                        var laboratorios = csvLaboratorio.GetRecords<TipoMovimiento>();
-                        context.TiposMovimientos.AddRange(laboratorios);
+                        var record = csvLaboratorio.GetRecords<TipoMovimiento>();
+                        context.TiposMovimientos.AddRange(record);
                         await context.SaveChangesAsync();
                     }
                 }
@@ -92,8 +92,8 @@ public class APIContextSeeder
                 {
                     using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
                     {
-                        var especie = csvLaboratorio.GetRecords<Especie>();
-                        context.Especies.AddRange(especie);
+                        var record = csvLaboratorio.GetRecords<Especie>();
+                        context.Especies.AddRange(record);
                         await context.SaveChangesAsync();
                     }
                 }
@@ -310,8 +310,8 @@ public class APIContextSeeder
                 {
                     using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
                     {
-                        var especie = csvLaboratorio.GetRecords<Veterinario>();
-                        context.Veterinarios.AddRange(especie);
+                        var record = csvLaboratorio.GetRecords<Veterinario>();
+                        context.Veterinarios.AddRange(record);
                         await context.SaveChangesAsync();
                     }
                 }
@@ -334,8 +334,8 @@ public class APIContextSeeder
                 {
                     using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
                     {
-                        var especie = csvLaboratorio.GetRecords<Laboratorio>();
-                        context.Laboratorios.AddRange(especie);
+                        var record = csvLaboratorio.GetRecords<Laboratorio>();
+                        context.Laboratorios.AddRange(record);
                         await context.SaveChangesAsync();
                     }
                 }
@@ -351,7 +351,6 @@ public class APIContextSeeder
     {
         try
         {
-            var ruta = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (!context.Mascotas.Any())
             {
                 using (var reader = new StreamReader("../Persistence/Data/Csvs/Mascota.csv"))

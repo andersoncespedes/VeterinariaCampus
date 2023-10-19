@@ -17,18 +17,6 @@ public class CitaController : BaseApiController
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-    [MapToApiVersion("1.1")]
-    [Authorize(Roles = "Administrador, Empleado")]
-    [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Pager<CitaDto>>> Paginacion([FromQuery] Params productParams)
-    {
-        var labs = await _unitOfWork.Citas.paginacion(productParams.PageIndex, productParams.PageSize, productParams.Search);
-        var mapeo = _mapper.Map<List<CitaDto>>(labs.registros);
-        return new Pager<CitaDto>(mapeo, labs.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
-    }
-    [MapToApiVersion("1.0")]
     [HttpGet]
     [Authorize(Roles = "Administrador, Empleado")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -38,6 +26,18 @@ public class CitaController : BaseApiController
         var mapeo = _mapper.Map<List<CitaDto>>(datos);
         return mapeo;
     }
+    [MapToApiVersion("1.1")]
+    [HttpGet]
+    [Authorize(Roles = "Administrador, Empleado")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<CitaDto>>> Paginacion([FromQuery] Params productParams)
+    {
+        var labs = await _unitOfWork.Citas.paginacion(productParams.PageIndex, productParams.PageSize, productParams.Search);
+        var mapeo = _mapper.Map<List<CitaDto>>(labs.registros);
+        return new Pager<CitaDto>(mapeo, labs.totalRegistros, productParams.PageIndex, productParams.PageSize, productParams.Search);
+    }
+    
     [Authorize(Roles = "Administrador")]
     [HttpPost("create")]
     [ProducesResponseType(StatusCodes.Status201Created)]

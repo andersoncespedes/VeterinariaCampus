@@ -17,6 +17,7 @@ var logger = new LoggerConfiguration()
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureCors();
@@ -25,7 +26,10 @@ builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
 builder.Services.ConfigureApiVersioning();
 builder.Services.ConfigureRatelimiting();
 builder.Services.AddJwt(builder.Configuration);
-
+builder.Services.AddSwaggerGen(options =>
+{
+    options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); 
+});
 builder.Services.AddAuthorization(opts =>
 {
     opts.DefaultPolicy = new AuthorizationPolicyBuilder()
@@ -66,8 +70,8 @@ using (var scope = app.Services.CreateScope())
         await APIContextSeeder.SeedRolesAsync(context, loggerFactory);
         await APIContextSeeder.SeedRazasAsync(context, loggerFactory);
         await APIContextSeeder.SeedMovMedAsync(context, loggerFactory);
-        await APIContextSeeder.SeedDetalMovAsync(context, loggerFactory);
         await APIContextSeeder.SeedAsync(context, loggerFactory);
+        await APIContextSeeder.SeedDetalMovAsync(context, loggerFactory);
         await APIContextSeeder.SeedCitasAsync(context, loggerFactory);
         await APIContextSeeder.SeedMedProvAsync(context, loggerFactory);
     }

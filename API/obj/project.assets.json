@@ -6495,33 +6495,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\janus\\.nuget\\packages\\": {}
+    "C:\\Users\\APOLT01\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\janus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\API\\obj\\",
+      "projectPath": "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\APOLT01\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\janus\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\APOLT01\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files\\dotnet\\sdk\\7.0.309\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Application\\Application.csproj": {
-              "projectPath": "C:\\Users\\janus\\Desktop\\ProyectoAnderson\\VeterinariaCampus\\Application\\Application.csproj"
+            "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\Application\\Application.csproj": {
+              "projectPath": "C:\\Users\\APOLT01\\Desktop\\Veterinaria\\Application\\Application.csproj"
             }
           }
         }
@@ -6622,7 +6621,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.309\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
