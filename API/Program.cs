@@ -69,6 +69,7 @@ using (var scope = app.Services.CreateScope())
         await APIContextSeeder.SeedDetalMovAsync(context, loggerFactory);
         await APIContextSeeder.SeedAsync(context, loggerFactory);
         await APIContextSeeder.SeedCitasAsync(context, loggerFactory);
+        await APIContextSeeder.SeedMedProvAsync(context, loggerFactory);
     }
     catch (Exception ex)
     {

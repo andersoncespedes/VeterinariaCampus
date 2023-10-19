@@ -224,6 +224,43 @@ public class APIContextSeeder
             logger.LogError(ex.Message);
         }
     }
+    public static async Task SeedMedProvAsync(APIContext context, ILoggerFactory loggerFactory)
+    {
+        try
+        {
+            if (!context.MedicamentoProveedores.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/MedicamentoProveedor.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<MedicamentoProveedores>();
+                        List<MedicamentoProveedores> entidad = new List<MedicamentoProveedores>();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new MedicamentoProveedores
+                            {
+                                IdMedicamentoFk = item.IdMedicamentoFk,
+                                IdProveedorFk = item.IdProveedorFk,
+                            });
+                        }
+                        context.MedicamentoProveedores.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            var logger = loggerFactory.CreateLogger<APIContext>();
+            logger.LogError(ex.Message);
+        }
+    }
     public static async Task SeedMovMedAsync(APIContext context, ILoggerFactory loggerFactory)
     {
         try
@@ -286,6 +323,7 @@ public class APIContextSeeder
             logger.LogError(ex.Message);
         }
     }
+
     public static async Task SeedLabAsync(APIContext context, ILoggerFactory loggerFactory)
     {
         try

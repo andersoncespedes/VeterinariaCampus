@@ -6,6 +6,8 @@ public class APIContext : DbContext
 {
     public DbSet<Citas> Citas { get; set; }
     public DbSet<DetalleMovimiento> DetallesMovimientos { get; set; }
+    public DbSet<MedicamentoProveedores> MedicamentoProveedores { get; set; }
+
     public DbSet<Especie> Especies { get; set; }
     public DbSet<Laboratorio> Laboratorios { get; set; }
     public DbSet<Mascota> Mascotas { get; set; }
