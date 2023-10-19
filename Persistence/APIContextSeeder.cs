@@ -75,7 +75,49 @@ public class APIContextSeeder
                     }
                 }
             }
-          if (!context.Medicamentos.Any())
+            if (!context.Razas.Any())
+            {
+                using (var readerLaboratorio = new StreamReader("../Persistence/Data/Csvs/Raza.csv"))
+                {
+                    using (var csvLaboratorio = new CsvReader(readerLaboratorio, CultureInfo.InvariantCulture))
+                    {
+                        var especie = csvLaboratorio.GetRecords<Raza>();
+                        context.Razas.AddRange(especie);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+            if (!context.Mascotas.Any())
+            {
+                using (var reader = new StreamReader("../Persistence/Data/Csvs/Mascota.csv"))
+                {
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        HeaderValidated = null, // Esto deshabilita la validación de encabezados
+                        MissingFieldFound = null
+                    }))
+                    {
+                        // Resto de tu código para leer y procesar el archivo CSV
+                        var list = csv.GetRecords<Mascota>();
+                        List<Mascota> entidad = new List<Mascota>();
+                        foreach (var item in list)
+                        {
+                            entidad.Add(new Mascota
+                            {
+                                Id = item.Id,
+                                Nombre = item.Nombre,
+                                FechaNacimiento = item.FechaNacimiento,
+                                IdPropietarioFk = item.IdPropietarioFk,
+                                IdRazaFk = item.IdRazaFk,
+                                IdEspecieFk = item.IdEspecieFk
+                            });
+                        }
+                        context.Mascotas.AddRange(entidad);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+            if (!context.Medicamentos.Any())
             {
                 using (var reader = new StreamReader("../Persistence/Data/Csvs/Medicamento.csv"))
                 {
