@@ -1,4 +1,4 @@
-# VeterinariaCampus
+# VeterinariaCampus 🐶🐱⚕️
 ## Introduccion
 La VeterinariaCampus es un proyecto desarrollado en NetCore con el proposito de elaborar una api funcional que permita gestionar una veterinaria, implementando funcionalidades con las cuales se pueda manipular informacion relacionada con el agendamiento de citas, medicamentos, proveedores, compras, etc.
 ## Caracteristicas
