@@ -16,6 +16,17 @@ public class CitaRepository : GenericRepository<Citas>, ICita
     {
         _context = context;
     }
+    public override async Task<(int totalRegistros, IEnumerable<Citas> registros)> paginacion(int pageIndex, int pageSize, string _search)
+    {
+        var totalRegistros = await _context.Set<Citas>().CountAsync();
+        var registros = await _context.Set<Citas>()
+        .Include(e => e.Veterinario)
+        .Include(e => e.Mascota)
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (totalRegistros, registros);
+    }
     public async Task<IEnumerable<Mascota>> FindCitasTrimestreVacunacion()
     {
         return await _context.Set<Citas>()

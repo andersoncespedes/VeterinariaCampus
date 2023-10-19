@@ -23,7 +23,9 @@ public class MappingProfile : Profile
 
         CreateMap<Propietario, PropietarioDto>().ReverseMap();
 
-        CreateMap<Citas, CitaDto>().ReverseMap();
+        CreateMap<Citas, CitaDto>()
+        .ForMember(e => e.Veterinario, opt => opt.MapFrom(e => e.Veterinario.Nombre))
+        .ReverseMap();
 
         CreateMap<Especie, EspecieDto>().ReverseMap();
 
