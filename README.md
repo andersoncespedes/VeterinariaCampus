@@ -37,6 +37,26 @@ La VeterinariaCampus es un proyecto desarrollado en NetCore con el proposito de 
 ```
 X-Version : 1.1
 ```
+### JWT
+#### Registrar
+- Endpoint
+```
+http://localhost:5022/api/User/Register/
+```
+#### Token
+- Endpoint
+```
+http://localhost:5022/api/User/Token/
+```
+#### Añadri rol
+- Endpoint
+```
+http://localhost:5022/api/User/addrole/
+```
+####  Refresh Token
+```
+http://localhost:5022/api/User/refresh-token/
+```
 ### Visualizar los Veterinarios Cuya Especialidad Sea Cirujano Vascular
 #### Endpoint
 ```
